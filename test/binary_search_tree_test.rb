@@ -81,4 +81,10 @@ class BinarySearchTreeTest < Minitest::Test
     movie_b = tree.insert("movie b", 40)
     assert_equal 1, tree.root.left_node.depth
   end
+  # test that include? method works
+  def test_that_include_method_works
+    tree = BinarySearchTree.new
+    tree.insert("movie a", 50)
+    assert tree.include?(50)
+  end
 end

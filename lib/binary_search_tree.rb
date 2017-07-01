@@ -17,9 +17,9 @@ class BinarySearchTree
     end
   end
 
-  def include?
+  def include?(score)
     # Verify/reject the presence of a score in the tree
-
+    
   end
 
   def depth_of
