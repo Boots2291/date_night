@@ -6,18 +6,18 @@ class Node
                 :depth
   # needs to store title and score, left node, right node, and depth
   def initialize(title, score)
-    @title_and_score = [title, score]
+    @title_and_score = {title => score}
     @left_node = nil
     @right_node = nil
     @depth = 0
   end
 
   def title
-    @title_and_score[0]
+    @title_and_score[score]
   end
 
   def score
-    @title_and_score[1]
+    @title_and_score[title]
   end
 
   def insert(title, score)

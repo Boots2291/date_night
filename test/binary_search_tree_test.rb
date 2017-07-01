@@ -30,7 +30,8 @@ class BinarySearchTreeTest < Minitest::Test
   def test_first_node_is_root_node
     tree = BinarySearchTree.new
     tree.insert("movie", 50)
-    assert_equal "movie", tree.root.title
+    binding.pry
+    assert_equal ({"movie": 50}), tree.root.title_and_score
   end
   # test that new node has two empty branches
   def test_node_starts_with_empty_branches
