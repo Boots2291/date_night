@@ -1,3 +1,6 @@
+require 'pry'
+require './lib/node'
+
 class BinarySearchTree
   attr_accessor :root
 
@@ -5,8 +8,12 @@ class BinarySearchTree
     @root == nil
   end
 
-  def insert
-
+  def insert(title, score) #should return depth as well
+    if root == nil
+      @root = Node.new(title, score)
+    else
+      root.insert(title, score)
+    end
   end
 
   def include?
