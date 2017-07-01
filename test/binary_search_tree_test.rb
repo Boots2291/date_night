@@ -42,23 +42,43 @@ class BinarySearchTreeTest < Minitest::Test
   def test_add_second_node_to_left
     tree = BinarySearchTree.new
     tree.insert("movie a", 50)
-    movie_2 = tree.insert("movie b", 40)
+    movie_b = tree.insert("movie b", 40)
     assert tree.root.left_node
   end
   # test that a second node can be inserted to the right
   def test_add_second_node_to_right
     tree = BinarySearchTree.new
     tree.insert("movie a", 50)
-    movie_2 = tree.insert("movie b", 60)
+    movie_b = tree.insert("movie b", 60)
     assert tree.root.right_node
   end
   # test that a third node can be inserted to the left
   def test_add_third_node_to_left
     tree = BinarySearchTree.new
     tree.insert("movie a", 50)
-    movie_2 = tree.insert("movie b", 40)
-    movie_3 = tree.insert("movie c", 30)
-    assert_equal movie_3, tree.root.left_node.left_node
+    movie_b = tree.insert("movie b", 40)
+    movie_c = tree.insert("movie c", 30)
+    assert_equal 2, tree.root.left_node.left_node.depth
   end
-
+  # test that a third node can be inserted to the right
+  def test_add_third_node_to_right
+    tree = BinarySearchTree.new
+    tree.insert("movie a", 50)
+    movie_b = tree.insert("movie b", 60)
+    movie_c = tree.insert("movie c", 70)
+    assert_equal 2, tree.root.right_node.right_node.depth
+  end
+  # test that insert returns depth of root node
+  def test_insert_root_node_returns_depth
+    tree = BinarySearchTree.new
+    tree.insert("movie", 50)
+    assert_equal 0, tree.root.depth
+  end
+  # test that second inserted node returns depth
+  def test_insert_second_node_returns_depth
+    tree = BinarySearchTree.new
+    tree.insert("movie a", 50)
+    movie_b = tree.insert("movie b", 40)
+    assert_equal 1, tree.root.left_node.depth
+  end
 end
