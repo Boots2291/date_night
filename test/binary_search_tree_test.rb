@@ -43,14 +43,22 @@ class BinarySearchTreeTest < Minitest::Test
     tree = BinarySearchTree.new
     tree.insert("movie a", 50)
     movie_2 = tree.insert("movie b", 40)
-    assert_equal tree.left_node, movie_2
+    assert tree.root.left_node
   end
   # test that a second node can be inserted to the right
   def test_add_second_node_to_right
     tree = BinarySearchTree.new
     tree.insert("movie a", 50)
     movie_2 = tree.insert("movie b", 60)
-    assert_equal tree.right_node, movie_2
+    assert tree.root.right_node
+  end
+  # test that a third node can be inserted to the left
+  def test_add_third_node_to_left
+    tree = BinarySearchTree.new
+    tree.insert("movie a", 50)
+    movie_2 = tree.insert("movie b", 40)
+    movie_3 = tree.insert("movie c", 30)
+    assert_equal movie_3, tree.root.left_node.left_node
   end
 
 end
