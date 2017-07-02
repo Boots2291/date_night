@@ -87,4 +87,11 @@ class BinarySearchTreeTest < Minitest::Test
     tree.insert("movie a", 50)
     assert tree.include?(50)
   end
+  # test that include? works when there are multiple scores
+  def test_that_include_can_search
+    tree = BinarySearchTree.new
+    tree.insert("movie a", 50)
+    movie_b = tree.insert("movie b", 40)
+    assert tree.include?(40)
+  end
 end

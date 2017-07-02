@@ -19,7 +19,15 @@ class BinarySearchTree
 
   def include?(score)
     # Verify/reject the presence of a score in the tree
-    
+    if root.score == score
+      return true
+    elsif root.score < score
+      move_right
+      include?(score)
+    else
+      move_left
+      include?(score)
+    end
   end
 
   def depth_of
