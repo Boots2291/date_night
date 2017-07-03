@@ -22,13 +22,13 @@ class Node
 
   def insert(title, score)
     if self.score < score
-      move_right(title, score)
+      insert_right(title, score)
     else
-      move_left(title, score)
+      insert_left(title, score)
     end
   end
 
-  def move_left(title, score)
+  def insert_left(title, score)
     if left_node.nil?
       @left_node = Node.new(title, score)
       @left_node.depth = depth + 1
@@ -37,7 +37,7 @@ class Node
     end
   end
 
-  def move_right(title, score)
+  def insert_right(title, score)
     if right_node.nil?
       @right_node = Node.new(title, score)
       @right_node.depth = depth + 1
