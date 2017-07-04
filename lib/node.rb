@@ -1,6 +1,8 @@
 require 'pry'
 class Node
-  attr_reader   :title_and_score
+  attr_reader   :title,
+                :score,
+                :data
   attr_accessor :left_node,
                 :right_node,
                 :depth
@@ -11,14 +13,7 @@ class Node
     @left_node = nil
     @right_node = nil
     @depth = 0
-  end
-
-  def title
-    @title
-  end
-
-  def score
-    @score
+    @data = {title => score}
   end
 
   def insert(score, title)
@@ -51,13 +46,13 @@ class Node
     if self.score == score
       return true
     elsif self.score < score
-      include_right?(score)
+      include_right(score)
     else
-      include_left?(score)
+      include_left(score)
     end
   end
 
-  def include_left?(score)
+  def include_left(score)
     if left_node.nil?
       return false
     else
@@ -65,11 +60,39 @@ class Node
     end
   end
 
-  def include_right?(score)
+  def include_right(score)
     if right_node.nil?
       return false
     else
       right_node.include?(score)
+    end
+  end
+
+  # possibly garbage below
+
+  def depth_of(score)
+    if self.score == score
+      return self.depth
+    elsif self.score < score
+      move_right(score)
+    else
+      move_left(score)
+    end
+  end
+
+  def move_left(score)
+    if left_node.nil?
+      return nil
+    else
+      left_node.depth_of(score)
+    end
+  end
+
+  def move_right(score)
+    if right_node.nil?
+      return nil
+    else
+      right_node.depth_of(score)
     end
   end
 

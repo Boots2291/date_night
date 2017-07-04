@@ -108,4 +108,29 @@ class BinarySearchTreeTest < Minitest::Test
     tree.insert(43, "movie i")
     assert tree.include?(52)
   end
+  # test that depth_of method works
+  def test_depth_of_method
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(45, "movie b")
+    tree.insert(40, "movie c")
+    tree.insert(35, "movie d")
+    assert_equal 3, tree.depth_of(35)
+  end
+  # test that dpeth_of returns nil if score doesn't exists
+  def test_depth_of_method_returns_nil
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(45, "movie b")
+    assert_nil tree.depth_of(35)
+  end
+  # test that max method works
+  def test_max_returns_data
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(45, "movie b")
+    tree.insert(55, "movie c")
+    target = tree.insert(60, "movie d")
+    assert_equal target.data, tree.max
+  end
 end

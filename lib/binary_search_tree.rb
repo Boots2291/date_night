@@ -26,16 +26,20 @@ class BinarySearchTree
     end
   end
 
-  def depth_of
+  def depth_of(score)
     # Reports the depth of the tree where a score appears
     # Return nil if the score does not exist
-
+    if root.score == score
+      return root.depth
+    else
+      root.depth_of(score)
+    end
   end
 
   def max
     # Which movie has the highest score in the list?
     # What is it’s score?
-
+    
   end
 
   def min
