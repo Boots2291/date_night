@@ -8,7 +8,7 @@ class BinarySearchTree
     @root == nil
   end
 
-  def insert(score, title) #should return depth as well
+  def insert(score, title)
     if root == nil
       @root = Node.new(score, title)
       root.depth
@@ -18,7 +18,6 @@ class BinarySearchTree
   end
 
   def include?(score)
-    # Verify/reject the presence of a score in the tree
     if root.score == score
       return true
     else
@@ -27,8 +26,6 @@ class BinarySearchTree
   end
 
   def depth_of(score)
-    # Reports the depth of the tree where a score appears
-    # Return nil if the score does not exist
     if root.score == score
       return root.depth
     else
@@ -36,15 +33,20 @@ class BinarySearchTree
     end
   end
 
-  def max
-    # Which movie has the highest score in the list?
-    # What is it’s score?
-    
+  def max(node = root)
+    if node.right_node.nil?
+      return node.data
+    else
+      max(node.right_node)
+    end
   end
 
-  def min
-    # Which movie has the lowest score in the list?
-    # What is it’s score?
+  def min(node = root)
+    if node.left_node.nil?
+      return node.data
+    else
+      min(node.left_node)
+    end
   end
 
   def sort

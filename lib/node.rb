@@ -74,13 +74,13 @@ class Node
     if self.score == score
       return self.depth
     elsif self.score < score
-      move_right(score)
+      depth_right(score)
     else
-      move_left(score)
+      depth_left(score)
     end
   end
 
-  def move_left(score)
+  def depth_left(score)
     if left_node.nil?
       return nil
     else
@@ -88,7 +88,7 @@ class Node
     end
   end
 
-  def move_right(score)
+  def depth_right(score)
     if right_node.nil?
       return nil
     else

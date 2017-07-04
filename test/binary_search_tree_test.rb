@@ -129,8 +129,19 @@ class BinarySearchTreeTest < Minitest::Test
     tree = BinarySearchTree.new
     tree.insert(50, "movie a")
     tree.insert(45, "movie b")
+    tree.insert(70, "movie c")
+    tree.insert(60, "movie d")
+    tree.insert(25, "movie e")
+    assert_equal ({"movie c" => 70}), tree.max
+  end
+  # test that min method works
+  def test_min_returns_data
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(45, "movie b")
     tree.insert(55, "movie c")
-    target = tree.insert(60, "movie d")
-    assert_equal target.data, tree.max
+    tree.insert(35, "movie d")
+    tree.insert(25, "movie e")
+    assert_equal ({"movie e" => 25}), tree.min
   end
 end
