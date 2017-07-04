@@ -8,12 +8,12 @@ class BinarySearchTree
     @root == nil
   end
 
-  def insert(title, score) #should return depth as well
+  def insert(score, title) #should return depth as well
     if root == nil
-      @root = Node.new(title, score)
+      @root = Node.new(score, title)
       root.depth
     else
-      root.insert(title, score)
+      root.insert(score, title)
     end
   end
 
@@ -21,12 +21,8 @@ class BinarySearchTree
     # Verify/reject the presence of a score in the tree
     if root.score == score
       return true
-    elsif root.score < score
-      move_right
-      include?(score)
     else
-      move_left
-      include?(score)
+      root.include?(score)
     end
   end
 
