@@ -2,8 +2,7 @@ require 'pry'
 require './lib/node'
 
 class BinarySearchTree
-  attr_accessor :root,
-                :node_count
+  attr_accessor :root
 
   def initialize
     @root == nil
