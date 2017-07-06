@@ -44,7 +44,7 @@ class Node
 
   def include?(score)
     if self.score == score
-      return true
+      true
     elsif self.score < score
       include_right(score)
     else
@@ -54,7 +54,7 @@ class Node
 
   def include_left(score)
     if left_node.nil?
-      return false
+      false
     else
       left_node.include?(score)
     end
@@ -62,17 +62,15 @@ class Node
 
   def include_right(score)
     if right_node.nil?
-      return false
+      false
     else
       right_node.include?(score)
     end
   end
 
-  # possibly garbage below
-
   def depth_of(score)
     if self.score == score
-      return self.depth
+      self.depth
     elsif self.score < score
       depth_right(score)
     else
@@ -82,7 +80,7 @@ class Node
 
   def depth_left(score)
     if left_node.nil?
-      return nil
+      nil
     else
       left_node.depth_of(score)
     end
@@ -90,7 +88,7 @@ class Node
 
   def depth_right(score)
     if right_node.nil?
-      return nil
+      nil
     else
       right_node.depth_of(score)
     end

@@ -2,7 +2,8 @@ require 'pry'
 require './lib/node'
 
 class BinarySearchTree
-  attr_accessor :root
+  attr_accessor :root,
+                :node_count
 
   def initialize
     @root == nil
@@ -18,24 +19,16 @@ class BinarySearchTree
   end
 
   def include?(score)
-    if root.score == score
-      return true
-    else
       root.include?(score)
-    end
   end
 
   def depth_of(score)
-    if root.score == score
-      return root.depth
-    else
       root.depth_of(score)
-    end
   end
 
   def max(node = root)
     if node.right_node.nil?
-      return node.data
+      node.data
     else
       max(node.right_node)
     end
@@ -43,38 +36,79 @@ class BinarySearchTree
 
   def min(node = root)
     if node.left_node.nil?
-      return node.data
+      node.data
     else
       min(node.left_node)
     end
   end
 
-  def sort
-    # Return an array of all the movies and scores in sorted ascending order
-    # Return them as an array of hashes.
-
+  def sort(node = root, sorted = [])
+    return sorted if node == nil
+    sort(node.left_node, sorted)
+    sorted << node.data
+    sort(node.right_node, sorted)
   end
 
   def load
-    # Where the return value is the number of movies inserted into the tree
-    # If a score is already present in the tree when load is called, ignore it.
+    counter = 0
+    File.open("./lib/movies.txt").readlines.each do |line|
+      eachline = line.strip.split(", ", 2)
+      if root && root.include?(eachline[0].to_i)
+        return
+      else
+        insert(eachline[0].to_i, eachline[1])
+        counter += 1
+      end
+    end
+    counter
   end
 
-  def health
-    # Report on the health of the tree by summarizing the number of child nodes
-    # (nodes beneath each node) at a given depth.
-    #
-    # For health, we’re worried about 3 values:
-    #   Score of the node
-    #   Total number of child nodes including the current node
-    #   Percentage of all the nodes that are this node or it’s children
-
+  def health(depth)
+    get_nodes_at_depth(depth).map do |node|
+      children = node_count(node)
+      total = node_count
+      [node.score,
+      node_count(node),
+      ((children.to_f / total.to_f) * 100).floor]
+    end
   end
 
+  def get_nodes_at_depth(depth, node = root, nodes = [])
+    return nodes if node == nil
+    get_nodes_at_depth(depth, node.left_node, nodes)
+    if node.depth == depth
+      nodes << node
+    end
+    get_nodes_at_depth(depth, node.right_node, nodes)
+  end
+
+  def node_count(node = root, count = [])
+    return count if node == nil
+    node_count(node.left_node, count)
+    count << node.title
+    node_count(node.right_node, count)
+    count.length
+  end
+
+  def count_children(score, node = root, count = ["root"], depth = @depth)
+    return count if node == nil
+    count_children(score, node.left_node, count)
+    if node.depth < depth
+      count << node.title
+    end
+    count_children(score, node.right_node, count)
+    count.length
+  end
   # Extensions
-  # def leaves
-  #
-  # end
+  def leaves(node = root, count = [])
+    return count if node == nil
+    leaves(node.left_node, count)
+    if node.left_node.nil? && node.right_node.nil?
+      count << node.title
+    end
+    leaves(node.right_node, count)
+    count.length
+  end
   #
   # def height
   #

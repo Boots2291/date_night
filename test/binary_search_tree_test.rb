@@ -144,4 +144,57 @@ class BinarySearchTreeTest < Minitest::Test
     tree.insert(25, "movie e")
     assert_equal ({"movie e" => 25}), tree.min
   end
+  # test that load works
+  def test_load_works
+    tree = BinarySearchTree.new
+    tree.load
+    assert tree.root.left_node != nil
+    assert tree.root.right_node != nil
+  end
+  # test that load ignores duplicates
+  def test_load_ignores_duplicates
+    tree = BinarySearchTree.new
+    tree.load
+    target = tree.load
+    assert_nil target
+  end
+  # test that sort returns an array with more than one entry
+  def test_sort_returns_an_array
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(40, "movie b")
+    tree.insert(60, "movie c")
+    tree.insert(45, "movie d")
+    target = tree.sort
+    assert_equal Array, target.class
+    assert_equal 4, target.length
+  end
+  # test that health works
+  def test_health_works
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(40, "movie b")
+    tree.insert(60, "movie c")
+    tree.insert(45, "movie d")
+    tree.insert(20, "movie e")
+    tree.insert(55, "movie f")
+    tree.insert(80, "movie g")
+    target = tree.health(0)
+    assert_equal [[50, 7, 100]], target
+  end
+  # test that leaves works
+  def test_leaves_works
+    tree = BinarySearchTree.new
+    tree.insert(50, "movie a")
+    tree.insert(40, "movie b")
+    tree.insert(60, "movie c")
+    tree.insert(45, "movie d")
+    tree.insert(20, "movie e")
+    tree.insert(55, "movie f")
+    tree.insert(80, "movie g")
+    assert_equal 4, tree.leaves
+  end
 end
+
+
+
